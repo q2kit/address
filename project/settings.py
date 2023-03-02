@@ -80,7 +80,7 @@ DATABASES = {
         'NAME': 'address',
         'USER': 'address',
         'PASSWORD': 'address123@',
-        'HOST': 'address.q2k.dev',
+        'HOST': 'localhost',
         'PORT': '3306',
         'OPTIONS': {
             "charset": "utf8mb4",

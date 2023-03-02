@@ -4,30 +4,8 @@ from api.models import *
 
 
 def help(request):
-    return JsonResponse({
-        "api": [
-            {
-                "path": "/provinces/",
-                "method": "GET",
-                "description": "Get all provinces",
-            },
-            {
-                "path": "/districts?province_id=xxx",
-                "method": "GET",
-                "description": "Get all districts by province_id",
-            },
-            {
-                "path": "/wards?district_id=xxx",
-                "method": "GET",
-                "description": "Get all wards by district_id",
-            },
-            {
-                "path": "/validate?province_id=xxx&district_id=xxx&ward_id=xxx",
-                "method": "GET",
-                "description": "Validate province_id, district_id, ward_id",
-            },
-        ]
-    })
+
+    return JsonResponse({})
 
 def get_provinces(request):
     provinces = Province.objects.all()
@@ -62,9 +40,7 @@ def validate(request):
     province_id = request.GET.get('province_id')
     district_id = request.GET.get('district_id')
     ward_id = request.GET.get('ward_id')
-    try:
-        if province_id and district_id and ward_id:
-            if Ward.objects.filter(id=ward_id, district_id=district_id, province_id=province_id).exists():
-                return JsonResponse({'result': True})
-    except:
-        return JsonResponse({'result': False})
+    if province_id and district_id and ward_id:
+        if Ward.objects.filter(id=ward_id, district_id=district_id, province_id=province_id).exists():
+            return JsonResponse({'result': True})
+    return JsonResponse({'result': False})
