@@ -8,12 +8,27 @@ def get_provinces(request):
 
 def get_districts(request):
     province_id = request.GET.get('province_id')
-    districts = District.objects.filter(province_id=province_id)
+    if not province_id:
+        districts = District.objects.all()
+    else:
+        try:
+            province_id = int(province_id)
+        except:
+            province_id = -1
+        districts = District.objects.filter(province_id=province_id)
     return JsonResponse({'districts': list(districts.values())})
 
 def get_wards(request):
     district_id = request.GET.get('district_id')
-    wards = Ward.objects.filter(district_id=district_id)
+    if not district_id:
+        wards = Ward.objects.all()
+    else:
+        try:
+            district_id = int(district_id)
+        except:
+            district_id = -1
+        wards = Ward.objects.filter(district_id=district_id)
+
     return JsonResponse({'wards': list(wards.values())})
 
 def validate(request):
