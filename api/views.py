@@ -3,7 +3,7 @@ from django.http import JsonResponse
 from api.models import *
 
 
-def help(request):
+def help_view(request, *args, **kwargs):
     return JsonResponse({
         "api": [
             {
